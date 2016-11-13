@@ -1,0 +1,14 @@
+doctype html
+html
+   head
+      title #{title}
+      link(rel='stylesheet', href='/stylesheets/style.css')
+   body
+      h1 #{title}
+      p Select a file to upload
+      form(action='/upload', method='post', enctype='multipart/form-data')
+         div
+            label Select File
+            input(type='file', name='upload_file')
+         div
+            input(type='submit')

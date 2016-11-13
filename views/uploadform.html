@@ -1,0 +1,26 @@
+<html>
+    <head><title>Sign Up</title>
+        <link rel="stylesheet" href="/stylesheets/style.css">
+    </head>
+    <body><h1>Sign Up</h1>
+
+        <p>Enter your name and email address to become a member.</p>
+        <form action="/profilesignup" method="post" enctype="multipart/form-data">
+            <div>
+                <label>Name</label>
+                <input type="text" name="name">
+            </div>
+            <div>
+                <label>Email</label>
+                <input type="text" name="email">
+            </div>
+            <div>
+                <label>Profile Image</label>
+                <input type="file" name="profile_image">
+            </div>
+            <div>
+                <input type="submit">
+            </div>
+        </form>
+    </body>
+</html>
