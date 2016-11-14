@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+
+
 //Include routers
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -12,6 +14,9 @@ var search = require('./routes/search');
 var signup = require('./routes/signup');
 var profilesignup = require('./routes/profilesignup');
 var upload = require('./routes/upload');
+var credentials = require('./credentials/credentials.js');
+var video = require('./routes/video');
+
 var app = express();
 
 // view engine setup
@@ -21,9 +26,12 @@ app.set('view engine', 'jade');
 // Middleware setup
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
+//Body parser to parse body object
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
+//Use cookie parser with credential
+app.use(cookieParser(credentials.cookieSecret));
+//Static file serve
 app.use(express.static(path.join(__dirname, 'public')));
 
 //Register routers
@@ -33,6 +41,8 @@ app.use('/search', search);
 app.use('/signup', signup);
 app.use('/profilesignup', profilesignup);
 app.use('/upload', upload);
+app.use('/viewvideo', video);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

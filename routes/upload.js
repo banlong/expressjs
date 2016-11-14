@@ -26,18 +26,27 @@ router.post('/', function(req, res) {
         console.log(fields);
         console.log('received files:');
         console.log(files);
-        res.send(files);
+
+        var file = files["upload_file"];
+
+        //Pipe the file back to client
+        var readableStream = fs.createReadStream(file.path);
+        readableStream.pipe(res);
+
+        //res.send(files);
     });
 
     //Emit when received a file
-    form.on('file', function(name, file) {
-        //Rename file
-        var currentFileName =  file.path;
-        var newFileName = form.uploadDir + "/" + file.name;
-        fs.rename(currentFileName, newFileName);
-        //console.log(name);          //field name: upload_file
-        //console.log(file.name);     //name of file in the user computer
-    });
+    //form.on('file', function(name, file) {
+    //    //Rename file
+    //    var currentFileName =  file.path;
+    //    var newFileName = form.uploadDir + "/" + file.name;
+    //    fs.rename(currentFileName, newFileName);
+    //    //console.log(name);          //field name: upload_file
+    //    //console.log(file.name);     //name of file in the user computer
+    //
+    //
+    //});
 
 });
 
